@@ -78,19 +78,22 @@ public class PlayerMovement : MonoBehaviour
                 //Debug.Log(Input.GetAxis("Mouse X"));
                // float rotateDegree = Input.GetAxis("Mouse X") * 25;
                 //playerModel.transform.Rotate(new Vector3(0,rotateDegree,0),Space.World);
-                
-                
+                rotDegree = Input.GetAxis("Mouse X") * 33;
+                rotDegree= Mathf.Clamp(rotDegree,-33,33);
+                //playerModel.transform.localRotation = Quaternion.Euler(playerModel.transform.rotation.x,rotDegree,playerModel.transform.rotation.z);
+                playerModel.transform.DOLocalRotate(new Vector3(playerModel.transform.localRotation.x, rotDegree, playerModel.transform.localRotation.z),0f);
+
 
             }
             else
             {
+                playerModel.transform.DOLocalRotate(Vector3.zero,0f);
+
+                //playerModel.transform.localRotation = Quaternion.Euler(Vector3.Lerp(playerModel.transform.rotation.eulerAngles,Vector3.zero, 0.2f)); 
                 touchPosX = 0;
             }
-            
-            //rotDegree = Input.GetAxis("Mouse X") * 25;
-            //rotDegree= Mathf.Clamp(rotDegree,-25,25);
-            //playerModel.transform.rotation = Quaternion.Euler(playerModel.transform.rotation.x,rotDegree,playerModel.transform.rotation.z);
 
+            
             switch (sideway)
             {
                 case 1:
