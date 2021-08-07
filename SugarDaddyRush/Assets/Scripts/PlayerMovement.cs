@@ -186,15 +186,13 @@ public class PlayerMovement : MonoBehaviour
 
     IEnumerator SliderFill(int fillAmount)
     {
-        float perSecond = fillAmount * 0.02f;
+        float perSecond = fillAmount * 0.04f;
 
-        for (int j = 0; j < 50; j++)
+        for (int j = 0; j < 25; j++)
         {
             slider.slider.value += perSecond;
             yield return new WaitForSeconds(0.02f);
         }
-
-        yield return new WaitForSeconds(2f);
     }
 
     //Testing Inputs
