@@ -4,7 +4,7 @@ using System.Collections.Generic;
 using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
-using Tabtale.TTPlugins;
+//using Tabtale.TTPlugins;
 
 public class GameManager : MonoBehaviour
 {
@@ -38,7 +38,7 @@ public class GameManager : MonoBehaviour
 
     private void Awake()
     {
-        TTPCore.Setup();
+       // TTPCore.Setup();
     
         if (PlayerPrefs.HasKey("diaAmount"))
         {
