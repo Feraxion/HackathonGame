@@ -1,21 +1,28 @@
 ﻿using System;
 using System.Collections;
 using System.Collections.Generic;
+using DG.Tweening;
 using UnityEngine;
 
 public class ObstacleRotator : MonoBehaviour
 {
     private Transform GO;
 
-    public bool xRotate, zRotate,yRotate;
+    //public bool xRotate, zRotate,yRotate;
+    
+    [Header("Degree per second")]
+    public int xSpeed, ySpeed, zSpeed;
 
+    private Vector3 degree;
     
     [SerializeField]
-    private float RotateSpeed;
+    //private float RotateSpeed;
+    
     // Start is called before the first frame update
     void Start()
     {
-        
+        degree = new Vector3(xSpeed, ySpeed, zSpeed);
+        StartCoroutine(rotateObject());
     }
 
     // Update is called once per frame
@@ -28,7 +35,7 @@ public class ObstacleRotator : MonoBehaviour
     {
         //GO = gameObject.transform;
         //GO.transform.rotation.x  += 5f;
-        Debug.Log(Time.timeScale);
+        /*Debug.Log(Time.timeScale);
         if (xRotate)
         {
             gameObject.transform.Rotate(RotateSpeed * Time.deltaTime,0f,0f);
@@ -45,6 +52,13 @@ public class ObstacleRotator : MonoBehaviour
         {
             gameObject.transform.Rotate(0,0,RotateSpeed* Time.deltaTime);
 
-        }
+        }*/
+    }
+
+    IEnumerator rotateObject()
+    {
+        gameObject.transform.DORotate(degree,1,RotateMode.WorldAxisAdd);
+        yield return new WaitForSeconds(1f);
+        StartCoroutine(rotateObject());
     }
 }

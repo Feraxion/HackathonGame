@@ -11,6 +11,7 @@ TagManager:
   - CollectibleNegative
   - PositiveDoor
   - NegativeDoor
+  - MatureWoman
   layers:
   - Default
   - TransparentFX

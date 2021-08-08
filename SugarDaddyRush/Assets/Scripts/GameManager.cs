@@ -71,6 +71,7 @@ public class GameManager : MonoBehaviour
 
         if (playerState == PlayerState.Finish)
         {
+                
 
             if (!isScoreCalculated)
             {

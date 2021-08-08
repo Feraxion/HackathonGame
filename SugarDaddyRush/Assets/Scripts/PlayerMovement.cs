@@ -12,7 +12,7 @@ public class PlayerMovement : MonoBehaviour
     public float movementSpeed;
     public float controlSpeed;
     //public Quaternion rotateObj;
-    public GameObject cameraFollower;
+    public GameObject cameraFollower,loser,decent,sugarDaddy, rotateModel;
     public PlayerSlider slider;
 
     public GameObject playerModel;
@@ -26,7 +26,7 @@ public class PlayerMovement : MonoBehaviour
     public int sideway;
     
     //Animation
-    public Animator animator;
+    //public Animator animator;
     
     //Not sure about this// Getting playerstate from gamemanager
     public GameManager.PlayerState playerState;
@@ -38,6 +38,11 @@ public class PlayerMovement : MonoBehaviour
 
     }
 
+    private void Start()
+    {
+        allWalk();
+    }
+
     private void Update()
     {
         //Make sure its in sync
@@ -47,6 +52,14 @@ public class PlayerMovement : MonoBehaviour
         if (playerState == GameManager.PlayerState.Playing)
         {
             GetInput();
+
+
+        }
+        
+        if (playerState == GameManager.PlayerState.Finish)
+        {
+            m_Rigidbody.velocity = Vector3.zero;
+            allDance();
 
 
         }
@@ -113,6 +126,14 @@ public class PlayerMovement : MonoBehaviour
     }
     private void OnTriggerEnter(Collider other)
     {
+        if (other.gameObject.CompareTag("MatureWoman"))
+        {
+            other.GetComponent<Animator>().SetInteger("MatureKiss",1);    
+            Destroy(other.gameObject,2f);
+            //other.GetComponent<MeshRenderer>().enabled = false;
+            other.GetComponent<ObjectParticlePlayer>().PlayParticles();
+        }
+        
         if (other.gameObject.CompareTag("ReturnLeft"))
         {
             m_Rigidbody.velocity = Vector3.zero;
@@ -152,8 +173,10 @@ public class PlayerMovement : MonoBehaviour
         {
 
             StartCoroutine(SliderFill(2));
+            
             //slider.slider.value
-            Destroy(other.gameObject,0.1f);
+            other.GetComponent<MeshRenderer>().enabled = false;
+            other.GetComponent<ObjectParticlePlayer>().PlayParticles();
         }
         
         if (other.gameObject.CompareTag("CollectibleNegative"))
@@ -161,7 +184,9 @@ public class PlayerMovement : MonoBehaviour
 
             StartCoroutine(SliderFill(-2));
             //slider.slider.value
-            Destroy(other.gameObject,0.1f);
+            other.GetComponent<MeshRenderer>().enabled = false;
+            other.GetComponent<ObjectParticlePlayer>().PlayParticles();
+            
         }
         
         if (other.gameObject.CompareTag("PositiveDoor"))
@@ -169,7 +194,9 @@ public class PlayerMovement : MonoBehaviour
 
             StartCoroutine(SliderFill(20));
             //slider.slider.value
-            Destroy(other.gameObject,0.1f);
+            other.GetComponent<MeshRenderer>().enabled = false;
+            other.GetComponent<ObjectParticlePlayer>().PlayParticles();
+            
         }
         
         if (other.gameObject.CompareTag("NegativeDoor"))
@@ -177,7 +204,9 @@ public class PlayerMovement : MonoBehaviour
 
             StartCoroutine(SliderFill(-15));
             //slider.slider.value
-            Destroy(other.gameObject,0.1f);
+            other.GetComponent<MeshRenderer>().enabled = false;
+            other.GetComponent<ObjectParticlePlayer>().PlayParticles();
+            
         }
         
         
@@ -195,6 +224,48 @@ public class PlayerMovement : MonoBehaviour
         }
     }
 
+    public void allWalk()
+    {
+        loser.GetComponent<Animator>().SetInteger("Movement",1);
+        decent.GetComponent<Animator>().SetInteger("Movement",1);
+        sugarDaddy.GetComponent<Animator>().SetInteger("Movement",1);
+    }
+    
+    public void allDance()
+    {
+        sugarDaddy.GetComponent<Animator>().SetInteger("Movement",2);
+    }
+
+    public void changeMeshToLoser()
+    {
+        playerModel = loser;
+        loser.gameObject.SetActive(true);
+        decent.gameObject.SetActive(false);
+        allWalk();
+        rotateModel.transform.DOLocalRotate(new Vector3(0, 360, 0), 0.75f,RotateMode.LocalAxisAdd);
+    }
+    
+    public void changeMeshToDecent()
+    {
+        playerModel = decent;
+        decent.gameObject.SetActive(true);
+        loser.gameObject.SetActive(false);
+        sugarDaddy.gameObject.SetActive(false);
+        allWalk();
+        rotateModel.transform.DOLocalRotate(new Vector3(0, 360, 0), 0.75f,RotateMode.LocalAxisAdd);
+
+    }
+    
+    public void changeMeshToSugarDaddy()
+    {
+        playerModel = sugarDaddy;
+        sugarDaddy.gameObject.SetActive(true);
+        decent.gameObject.SetActive(false);
+        allWalk();
+        rotateModel.transform.DOLocalRotate(new Vector3(0, 360, 0), 0.75f,RotateMode.LocalAxisAdd);
+
+    }
+    
     //Testing Inputs
     void GetInput()
     {
