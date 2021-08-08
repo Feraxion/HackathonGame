@@ -14,6 +14,7 @@ GameObject:
   - component: {fileID: 3882953344077863106}
   - component: {fileID: 3882953344077863109}
   - component: {fileID: 3882953344077863108}
+  - component: {fileID: 501610026173295643}
   m_Layer: 0
   m_Name: negatifCollectible2
   m_TagString: Untagged
@@ -110,10 +111,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 44132f112387e1740b9bff5e56836575, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  xRotate: 0
-  zRotate: 1
-  yRotate: 0
-  RotateSpeed: 25
+  xSpeed: 0
+  ySpeed: 0
+  zSpeed: 0
 --- !u!114 &3882953344077863108
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -144,6 +144,21 @@ MonoBehaviour:
   zAnimSpeed: 0
   moveForward: 0
   moveBackward: 0
+--- !u!114 &501610026173295643
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3882953344077863111}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 0b490380e6b525645b2128c557493e59, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  particles:
+  - {fileID: 6710109304221665274}
+  - {fileID: 6340262590087310944}
 --- !u!1 &6340262590087310944
 GameObject:
   m_ObjectHideFlags: 0
@@ -161,7 +176,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &7126320540284759271
 Transform:
   m_ObjectHideFlags: 0
@@ -4923,7 +4938,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &6907976757237286701
 Transform:
   m_ObjectHideFlags: 0
