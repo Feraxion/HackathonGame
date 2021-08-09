@@ -162,7 +162,7 @@ public class PlayerMovement : MonoBehaviour
             //other.GetComponent<Animator>().SetInteger("MatureKiss",1);    
             //other.GetComponent<MeshRenderer>().enabled = false;
             other.GetComponent<ObjectParticlePlayer>().PlayParticles();
-            Destroy(other.gameObject,0.1f);
+            Destroy(other.gameObject,0.5f);
 
         }
         
