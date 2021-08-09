@@ -147,6 +147,17 @@ public class PlayerMovement : MonoBehaviour
             other.GetComponent<ObjectParticlePlayer>().PlayParticles();
         }
         
+        if (other.gameObject.CompareTag("TwerkGirl"))
+        {
+            StartCoroutine(SliderFill(-10));
+
+            //other.GetComponent<Animator>().SetInteger("MatureKiss",1);    
+            //other.GetComponent<MeshRenderer>().enabled = false;
+            other.GetComponent<ObjectParticlePlayer>().PlayParticles();
+            Destroy(other.gameObject,0.5f);
+
+        }
+        
         if (other.gameObject.CompareTag("ReturnLeft"))
         {
             m_Rigidbody.velocity = Vector3.zero;

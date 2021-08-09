@@ -1196,9 +1196,11 @@ GameObject:
   - component: {fileID: 4670243137133019900}
   - component: {fileID: 5141615571203810569}
   - component: {fileID: 8267240613082183981}
+  - component: {fileID: 6999552973872912465}
+  - component: {fileID: 5221596713824770171}
   m_Layer: 0
   m_Name: girl2Road
-  m_TagString: Untagged
+  m_TagString: TwerkGirl
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -1212,7 +1214,7 @@ Transform:
   m_GameObject: {fileID: 5448187658276001862}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: -118.3, y: 0.316, z: 79.73}
-  m_LocalScale: {x: 0.9199596, y: 0.9199596, z: 0.9199596}
+  m_LocalScale: {x: 1.6, y: 1.2, z: 2}
   m_Children:
   - {fileID: 2399880055244863297}
   - {fileID: 900820733059097192}
@@ -1250,6 +1252,34 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 33f22331687f59844a7a4ca233996be7, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!65 &6999552973872912465
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5448187658276001862}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Size: {x: 0.93137455, y: 1.9966844, z: 1.1622473}
+  m_Center: {x: -0.034312718, y: 0.960711, z: -0.08112365}
+--- !u!114 &5221596713824770171
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5448187658276001862}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 0b490380e6b525645b2128c557493e59, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  particles:
+  - {fileID: 0}
+  - {fileID: 0}
 --- !u!1 &5808180025529308572
 GameObject:
   m_ObjectHideFlags: 0
