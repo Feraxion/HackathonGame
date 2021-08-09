@@ -15976,6 +15976,10 @@ PrefabInstance:
       value: 
       objectReference: {fileID: 1578000038}
     - target: {fileID: 2596144543903345053, guid: e37a6ec496f382c4195149e72e3c46c1, type: 3}
+      propertyPath: gameMng
+      value: 
+      objectReference: {fileID: 1578000035}
+    - target: {fileID: 2596144543903345053, guid: e37a6ec496f382c4195149e72e3c46c1, type: 3}
       propertyPath: girlPos1
       value: 
       objectReference: {fileID: 223838730}
@@ -24686,9 +24690,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   diamondCount: 0
-  currentLevelDiamondCount: 0
-  bonusMultiplier: 0
-  diamondText: {fileID: 0}
+  diamondText: {fileID: 844763660}
   StartScreen: {fileID: 184548231}
   FinishScreen: {fileID: 0}
   GameOverScreen: {fileID: 0}

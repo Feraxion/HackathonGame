@@ -15,6 +15,7 @@ public class PlayerMovement : MonoBehaviour
     public GameObject cameraFollower,loser,decent,sugarDaddy, rotateModel, finishPos,finishGirl,finishGirl2,girlPos1,girlPos2,finishGirl3,finishGirl4;
     public PlayerSlider slider;
     public bool isFinish;
+    public GameManager gameMng;
 
     public GameObject playerModel;
     
@@ -179,6 +180,7 @@ public class PlayerMovement : MonoBehaviour
         {
 
             StartCoroutine(SliderFill(2));
+            gameMng.IncrementDiamond();
             
             //slider.slider.value
             other.GetComponent<MeshRenderer>().enabled = false;

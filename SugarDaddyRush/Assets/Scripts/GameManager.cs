@@ -10,10 +10,7 @@ public class GameManager : MonoBehaviour
 {
     [Header("Diamond Stats")]
     [SerializeField] public int diamondCount;
-    [SerializeField] public int currentLevelDiamondCount;
-    [SerializeField] public int bonusMultiplier;
-    private bool isScoreCalculated;
-
+    
 
     [SerializeField] public TextMeshProUGUI diamondText;
     public GameObject StartScreen;
@@ -40,16 +37,7 @@ public class GameManager : MonoBehaviour
     {
         //TTPCore.Setup();
     
-        if (PlayerPrefs.HasKey("diaAmount"))
-        {
-            diamondCount = PlayerPrefs.GetInt("diaAmount");
-        }
-        else
-        {
-            diamondCount = 0;
-            
-        }
-
+        
         inst = this;
         playerState = PlayerState.Prepare;
             //Application.targetFrameRate = 60;
@@ -57,7 +45,6 @@ public class GameManager : MonoBehaviour
 
     private void Start()
     {
-        isScoreCalculated = false;
     }
 
     void Update()
@@ -73,23 +60,7 @@ public class GameManager : MonoBehaviour
         {
                 
 
-            if (!isScoreCalculated)
-            {
-                //Calculates diamond amount to give player
-                
-                diamondCount += (currentLevelDiamondCount * bonusMultiplier);
             
-                //Defaults them for next level
-                //currentLevelDiamondCount = 0;
-                bonusMultiplier = 1;
-                    
-                //Updates the text
-                diamondText.text = ""  + diamondCount ;
-                isScoreCalculated = true;
-            
-            
-                PlayerPrefs.SetInt("diaAmount",diamondCount);
-            }
                
 
             FinishScreen.SetActive(true);
@@ -99,27 +70,24 @@ public class GameManager : MonoBehaviour
         if (playerState == PlayerState.Died)
         {
             GameOverScreen.SetActive(true);
-            currentLevelDiamondCount = 0;
         }
     }
     public void IncrementDiamond()
     {
         //Keeps it in temporary variable in case player dies before finishing
-        currentLevelDiamondCount++;
-        diamondText.text = "" + (currentLevelDiamondCount + diamondCount) ;
+        diamondCount += 20;
+        diamondText.text = "" + diamondCount ;
     }
 
     public void BonusAdWatched()
     {
 
             //Adds the 3x video watched bonus
-            diamondCount += (currentLevelDiamondCount * 3);
             
             //Defaults them for next level
                     
             //Updates the text
             diamondText.text = ""  + diamondCount ;
-            currentLevelDiamondCount = 0;
         
             PlayerPrefs.SetInt("diaAmount",diamondCount);
 
