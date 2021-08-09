@@ -12,7 +12,7 @@ public class PlayerMovement : MonoBehaviour
     public float movementSpeed;
     public float controlSpeed;
     //public Quaternion rotateObj;
-    public GameObject cameraFollower,loser,decent,sugarDaddy, rotateModel, finishPos;
+    public GameObject cameraFollower,loser,decent,sugarDaddy, rotateModel, finishPos,finishGirl,finishGirl2,girlPos1,girlPos2,finishGirl3,finishGirl4;
     public PlayerSlider slider;
     public bool isFinish;
 
@@ -217,13 +217,41 @@ public class PlayerMovement : MonoBehaviour
 
         if (other.gameObject.CompareTag("Finish"))
         {
+            other.GetComponent<ObjectParticlePlayer>().PlayParticles();
+
             playerState = GameManager.PlayerState.Finish;
             gameObject.transform.DOMove(finishPos.transform.position,3);
             m_Rigidbody.velocity = Vector3.zero;
+            StartCoroutine(Wait2());
+            
+
             StartCoroutine(Wait());
         }
         
         
+    }
+    
+    IEnumerator Wait2()
+    {
+        finishGirl3.GetComponent<Animator>().SetInteger("Movement",2);
+        finishGirl4.GetComponent<Animator>().SetInteger("Movement",2);
+        
+        yield return new WaitForSeconds(2f);
+        finishGirl.SetActive(true);
+        finishGirl2.SetActive(true);
+        finishGirl2.GetComponent<Animator>().SetInteger("Movement",1);
+        finishGirl.GetComponent<Animator>().SetInteger("Movement",1);
+        
+        finishGirl.transform.DOMove(girlPos1.transform.position, 1);
+        finishGirl2.transform.DOMove(girlPos2.transform.position, 1);
+
+        yield return new WaitForSeconds(1f);
+        finishGirl.transform.DORotate(new Vector3(0, 180, 0), 1);
+        
+        finishGirl2.transform.DORotate(new Vector3(0, 180, 0), 1);
+        finishGirl2.GetComponent<Animator>().SetInteger("Movement",2);
+        finishGirl.GetComponent<Animator>().SetInteger("Movement",2);
+
     }
 
     IEnumerator Wait()
@@ -231,6 +259,7 @@ public class PlayerMovement : MonoBehaviour
         
             yield return new WaitForSeconds(3f);
             allDance();
+            
             isFinish = true;
 
     }
