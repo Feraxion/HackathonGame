@@ -12,8 +12,9 @@ public class PlayerMovement : MonoBehaviour
     public float movementSpeed;
     public float controlSpeed;
     //public Quaternion rotateObj;
-    public GameObject cameraFollower,loser,decent,sugarDaddy, rotateModel;
+    public GameObject cameraFollower,loser,decent,sugarDaddy, rotateModel, finishPos;
     public PlayerSlider slider;
+    public bool isFinish;
 
     public GameObject playerModel;
     
@@ -55,22 +56,20 @@ public class PlayerMovement : MonoBehaviour
 
 
         }
-        
-        if (playerState == GameManager.PlayerState.Finish)
-        {
-            m_Rigidbody.velocity = Vector3.zero;
-            allDance();
-
-
-        }
 
        
     }
 
     private void FixedUpdate()
     {
+        if (isFinish)
+        {
+            m_Rigidbody.velocity = Vector3.zero;
+            m_Rigidbody.constraints = RigidbodyConstraints.FreezeAll;
+        }
+        
         //Start game if in Playing State
-        if (playerState == GameManager.PlayerState.Playing)
+        if (playerState == GameManager.PlayerState.Playing && !isFinish)
         {
             //RigidBody Eklentisinden sonra burası rigidbody olarak değişecek
             //m_Rigidbody.AddForce(transform.forward * movementSpeed);
@@ -123,11 +122,18 @@ public class PlayerMovement : MonoBehaviour
                     return;
             }
         }
+
+        if (playerState == GameManager.PlayerState.Finish)
+        {
+            m_Rigidbody.velocity = Vector3.zero;
+        }
     }
     private void OnTriggerEnter(Collider other)
     {
         if (other.gameObject.CompareTag("MatureWoman"))
         {
+            StartCoroutine(SliderFill(-15));
+
             other.GetComponent<Animator>().SetInteger("MatureKiss",1);    
             Destroy(other.gameObject,2f);
             //other.GetComponent<MeshRenderer>().enabled = false;
@@ -208,11 +214,27 @@ public class PlayerMovement : MonoBehaviour
             other.GetComponent<ObjectParticlePlayer>().PlayParticles();
             
         }
+
+        if (other.gameObject.CompareTag("Finish"))
+        {
+            playerState = GameManager.PlayerState.Finish;
+            gameObject.transform.DOMove(finishPos.transform.position,3);
+            m_Rigidbody.velocity = Vector3.zero;
+            StartCoroutine(Wait());
+        }
         
         
     }
 
+    IEnumerator Wait()
+    {
+        
+            yield return new WaitForSeconds(3f);
+            allDance();
+            isFinish = true;
 
+    }
+    
     IEnumerator SliderFill(int fillAmount)
     {
         float perSecond = fillAmount * 0.04f;
@@ -234,6 +256,7 @@ public class PlayerMovement : MonoBehaviour
     public void allDance()
     {
         sugarDaddy.GetComponent<Animator>().SetInteger("Movement",2);
+        playerModel.transform.DORotate(new Vector3(0, 180, 0), 1);
     }
 
     public void changeMeshToLoser()
