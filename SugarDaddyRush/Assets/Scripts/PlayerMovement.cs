@@ -17,7 +17,7 @@ public class PlayerMovement : MonoBehaviour
     public bool isFinish;
     public GameManager gameMng;
     public ParticleSystem playerTurnParticle;
-    
+    public GameObject sideGirlLeft, sideGirlRight, leftGirlPos, rightGirlPos;
     public GameObject playerModel;
     
     //Touch settings
@@ -96,12 +96,17 @@ public class PlayerMovement : MonoBehaviour
                 rotDegree= Mathf.Clamp(rotDegree,-33,33);
                 //playerModel.transform.localRotation = Quaternion.Euler(playerModel.transform.rotation.x,rotDegree,playerModel.transform.rotation.z);
                 playerModel.transform.DOLocalRotate(new Vector3(playerModel.transform.localRotation.x, rotDegree, playerModel.transform.localRotation.z),0f);
+                sideGirlLeft.transform.DOLocalRotate(new Vector3(playerModel.transform.localRotation.x, rotDegree, playerModel.transform.localRotation.z),0f);
+
+                sideGirlRight.transform.DOLocalRotate(new Vector3(playerModel.transform.localRotation.x, rotDegree, playerModel.transform.localRotation.z),0f);
 
 
             }
             else
             {
                 playerModel.transform.DOLocalRotate(Vector3.zero,0f);
+                sideGirlLeft.transform.DOLocalRotate(Vector3.zero,0f);
+                sideGirlRight.transform.DOLocalRotate(Vector3.zero,0f);
 
                 //playerModel.transform.localRotation = Quaternion.Euler(Vector3.Lerp(playerModel.transform.rotation.eulerAngles,Vector3.zero, 0.2f)); 
                 touchPosX = 0;
@@ -204,7 +209,8 @@ public class PlayerMovement : MonoBehaviour
             StartCoroutine(SliderFill(20));
             //slider.slider.value
             other.GetComponent<MeshRenderer>().enabled = false;
-            other.GetComponent<ObjectParticlePlayer>().PlayParticles();
+            //other.GetComponent<ObjectParticlePlayer>().PlayParticles();
+            other.GetComponent<DestroyOnTrigger>().DestroyDoorObjects();
             
         }
         
@@ -214,7 +220,9 @@ public class PlayerMovement : MonoBehaviour
             StartCoroutine(SliderFill(-15));
             //slider.slider.value
             other.GetComponent<MeshRenderer>().enabled = false;
-            other.GetComponent<ObjectParticlePlayer>().PlayParticles();
+            //other.GetComponent<ObjectParticlePlayer>().PlayParticles();
+            other.GetComponent<DestroyOnTrigger>().DestroyDoorObjects();
+
             
         }
 
@@ -226,8 +234,6 @@ public class PlayerMovement : MonoBehaviour
             gameObject.transform.DOMove(finishPos.transform.position,3);
             m_Rigidbody.velocity = Vector3.zero;
             StartCoroutine(Wait2());
-            
-
             StartCoroutine(Wait());
         }
         
@@ -294,12 +300,16 @@ public class PlayerMovement : MonoBehaviour
         loser.GetComponent<Animator>().SetInteger("Movement",1);
         decent.GetComponent<Animator>().SetInteger("Movement",1);
         sugarDaddy.GetComponent<Animator>().SetInteger("Movement",1);
+        sideGirlLeft.GetComponent<Animator>().SetInteger("Movement",1);
+        sideGirlRight.GetComponent<Animator>().SetInteger("Movement",1);
     }
     
     public void allDance()
     {
         sugarDaddy.GetComponent<Animator>().SetInteger("Movement",2);
         playerModel.transform.DORotate(new Vector3(0, 180, 0), 1);
+        sideGirlLeft.GetComponent<Animator>().SetInteger("Movement",2);
+        sideGirlRight.GetComponent<Animator>().SetInteger("Movement",2);
     }
 
     public void changeMeshToLoser()
@@ -317,6 +327,8 @@ public class PlayerMovement : MonoBehaviour
         decent.gameObject.SetActive(true);
         loser.gameObject.SetActive(false);
         sugarDaddy.gameObject.SetActive(false);
+        leftGirlPos.SetActive(false);
+        rightGirlPos.SetActive(false);
         allWalk();
         rotateModel.transform.DOLocalRotate(new Vector3(0, 360, 0), 0.75f,RotateMode.LocalAxisAdd);
 
@@ -327,8 +339,12 @@ public class PlayerMovement : MonoBehaviour
         playerModel = sugarDaddy;
         sugarDaddy.gameObject.SetActive(true);
         decent.gameObject.SetActive(false);
+        leftGirlPos.SetActive(true);
+        rightGirlPos.SetActive(true);
         allWalk();
         rotateModel.transform.DOLocalRotate(new Vector3(0, 360, 0), 0.75f,RotateMode.LocalAxisAdd);
+        leftGirlPos.transform.DOLocalRotate(new Vector3(0, 360, 0), 0.75f,RotateMode.LocalAxisAdd);
+        rightGirlPos.transform.DOLocalRotate(new Vector3(0, 360, 0), 0.75f,RotateMode.LocalAxisAdd);
 
     }
     
