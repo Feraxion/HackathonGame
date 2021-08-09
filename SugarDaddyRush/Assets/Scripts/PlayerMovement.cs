@@ -16,7 +16,8 @@ public class PlayerMovement : MonoBehaviour
     public PlayerSlider slider;
     public bool isFinish;
     public GameManager gameMng;
-
+    public ParticleSystem playerTurnParticle;
+    
     public GameObject playerModel;
     
     //Touch settings
@@ -266,6 +267,16 @@ public class PlayerMovement : MonoBehaviour
 
     }
     
+    IEnumerator Particle()
+    {
+        playerTurnParticle.gameObject.SetActive(true);
+
+        yield return new WaitForSeconds(2f);
+        playerTurnParticle.gameObject.SetActive(false);
+
+
+    }
+    
     IEnumerator SliderFill(int fillAmount)
     {
         float perSecond = fillAmount * 0.04f;
@@ -279,6 +290,7 @@ public class PlayerMovement : MonoBehaviour
 
     public void allWalk()
     {
+        StartCoroutine(Particle());
         loser.GetComponent<Animator>().SetInteger("Movement",1);
         decent.GetComponent<Animator>().SetInteger("Movement",1);
         sugarDaddy.GetComponent<Animator>().SetInteger("Movement",1);

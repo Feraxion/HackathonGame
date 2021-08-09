@@ -13,7 +13,7 @@ public class PlayerSlider : MonoBehaviour
 
     public PlayerMovement playerMovScript;
     // Start is called before the first frame update
-    void Start()
+    void Awake()
     {
         loser = true;
     }
