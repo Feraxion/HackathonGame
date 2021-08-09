@@ -57,8 +57,8 @@ public class ObstacleRotator : MonoBehaviour
 
     IEnumerator rotateObject()
     {
-        gameObject.transform.DORotate(degree,1,RotateMode.WorldAxisAdd);
-        yield return new WaitForSeconds(0.9f);
+        gameObject.transform.DORotate(degree,21,RotateMode.WorldAxisAdd);
+        yield return new WaitForSeconds(20f);
         StartCoroutine(rotateObject());
     }
 }
