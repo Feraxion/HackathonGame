@@ -14,7 +14,7 @@ public class PlayerMovement : MonoBehaviour
     //public Quaternion rotateObj;
     public GameObject cameraFollower,loser,decent,sugarDaddy, rotateModel, finishPos,finishGirl,finishGirl2,girlPos1,girlPos2,finishGirl3,finishGirl4;
     public PlayerSlider slider;
-    public bool isFinish;
+    public bool isFinish,isSliderEmptying;
     public GameManager gameMng;
     public ParticleSystem playerTurnParticle;
     public GameObject sideGirlLeft, sideGirlRight, leftGirlPos, rightGirlPos;
@@ -48,6 +48,12 @@ public class PlayerMovement : MonoBehaviour
 
     private void Update()
     {
+        if (isSliderEmptying)
+        {
+            StartCoroutine(SugarDaddyLoseMoney());
+            isSliderEmptying = false;
+        }
+        
         //Make sure its in sync
         playerState =  GameManager.inst.playerState ;
 
@@ -154,7 +160,7 @@ public class PlayerMovement : MonoBehaviour
             //other.GetComponent<Animator>().SetInteger("MatureKiss",1);    
             //other.GetComponent<MeshRenderer>().enabled = false;
             other.GetComponent<ObjectParticlePlayer>().PlayParticles();
-            Destroy(other.gameObject,0.5f);
+            Destroy(other.gameObject,0.1f);
 
         }
         
@@ -356,6 +362,23 @@ public class PlayerMovement : MonoBehaviour
         rotateModel.transform.DOLocalRotate(new Vector3(0, 360, 0), 0.75f,RotateMode.LocalAxisAdd);
         leftGirlPos.transform.DOLocalRotate(new Vector3(0, 360, 0), 0.75f,RotateMode.LocalAxisAdd);
         rightGirlPos.transform.DOLocalRotate(new Vector3(0, 360, 0), 0.75f,RotateMode.LocalAxisAdd);
+        isSliderEmptying = true;
+    }
+    
+    IEnumerator SugarDaddyLoseMoney()
+    {
+        StartCoroutine(SliderFill(-2));
+
+        yield return new WaitForSeconds(1.2f);
+        if (playerModel == sugarDaddy)
+        {
+            isSliderEmptying = true;
+
+        }
+        else
+        {
+            isSliderEmptying = false;
+        }
 
     }
     

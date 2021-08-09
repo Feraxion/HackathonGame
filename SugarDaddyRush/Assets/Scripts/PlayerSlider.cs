@@ -45,7 +45,7 @@ public class PlayerSlider : MonoBehaviour
             sliderFill.DOColor(Color.yellow, 1);
             //sliderFill.color = Color.Lerp(sliderFill.color,new Color(250,202,102), 1);
 
-
+            
             decent = true;
             loser = false;
             sugarDaddy = false;
