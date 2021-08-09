@@ -74,6 +74,8 @@ public class PlayerMovement : MonoBehaviour
         {
             m_Rigidbody.velocity = Vector3.zero;
             m_Rigidbody.constraints = RigidbodyConstraints.FreezeAll;
+            StopCoroutine(SugarDaddyLoseMoney());
+            isSliderEmptying = false;
         }
         
         //Start game if in Playing State
