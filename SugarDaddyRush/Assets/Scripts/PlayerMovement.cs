@@ -147,7 +147,7 @@ public class PlayerMovement : MonoBehaviour
             m_Rigidbody.velocity = Vector3.zero;
             
             Vector3 rotateLeft = new Vector3(0, -90, 0);
-            cameraFollower.transform.DORotate(rotateLeft, 1.4f);
+            cameraFollower.transform.DORotate(rotateLeft, 1.2f);
             gameObject.transform.DORotate(rotateLeft, 1.4f);
 
             sideway = 1;
@@ -159,7 +159,7 @@ public class PlayerMovement : MonoBehaviour
             m_Rigidbody.velocity = Vector3.zero;
             
             Vector3 rotateMiddle = new Vector3(0, 0, 0);
-            cameraFollower.transform.DORotate(rotateMiddle, 1.4f);
+            cameraFollower.transform.DORotate(rotateMiddle, 1.2f);
             gameObject.transform.DORotate(rotateMiddle, 1.4f);
 
             sideway = 2;
@@ -171,7 +171,7 @@ public class PlayerMovement : MonoBehaviour
             m_Rigidbody.velocity = Vector3.zero;
 
             Vector3 rotateRight = new Vector3(0, 90, 0);
-            cameraFollower.transform.DORotate(rotateRight, 1.4f);
+            cameraFollower.transform.DORotate(rotateRight, 1.2f);
             gameObject.transform.DORotate(rotateRight, 1.4f);
 
             sideway = 3;
